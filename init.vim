@@ -21,8 +21,6 @@ set switchbuf=useopen,usetab
 call plug#begin('~/.local/share/nvim/plugged')
     Plug 'kooparse/vim-color-desert-night'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
     Plug 'scrooloose/nerdtree'
     Plug 'jistr/vim-nerdtree-tabs'
     Plug 'Raimondi/delimitMate'
