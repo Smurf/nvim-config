@@ -2,8 +2,8 @@
 "let &packpath = &runtimepath
 "source ~/.vimrc
 "
-set termguicolors
 
+set termguicolors
 set nu! 
 set incsearch
 set tabstop=2
@@ -17,6 +17,8 @@ set nofoldenable
 "stop nerdtree from popping open every file open
 set switchbuf=useopen,usetab
 
+syntax on
+
 
 call plug#begin('~/.local/share/nvim/plugged')
     Plug 'kooparse/vim-color-desert-night'
@@ -28,6 +30,8 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'vim-airline/vim-airline-themes'
     Plug 'mrk21/yaml-vim'
     Plug 'neovim/nvim-lspconfig'
+    Plug 'mrk21/yaml-vim'
+    Plug 'Yggdroot/indentLine'
 call plug#end()
 
 colorscheme desert-night
@@ -119,3 +123,11 @@ inoremap <silent><expr> <S-Tab>
 " Make <CR> to accept selected completion item or notify coc.nvim to format
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" YAML files
+au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
+"Close popups for auto complete
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+
+autocmd FileType yaml setlocal et ts=2 ai sw=2 nu sts=0
+let g:indentLine_fileTypeExclude = ['makrdown', 'json']
