@@ -28,3 +28,10 @@ This nvim config has been setup to allow autocomplete with python.
     }    
 }    
 ```
+
+### Creating Type Stubs
+
+Pyright depends on type stubs. Thankfully these can be created with the `pyright --createstub $IMPORT_NAME`. 
+This can include modules that are in the include path in the `pyrightconfig.json` file as well as modules that are installed via `pip`.
+
+> **NOTE:** If you have a large number of modules the parent module can be used to generate stubs for all submodules.
