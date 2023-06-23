@@ -125,4 +125,4 @@ au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 autocmd FileType yaml setlocal et ts=2 ai sw=2 nu sts=0
-let g:indentLine_fileTypeExclude = ['makrdown', 'json']
+let g:indentLine_fileTypeExclude = ['markdown', 'json']
