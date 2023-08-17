@@ -53,7 +53,6 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 autocmd FileType yaml setlocal et ts=2 ai sw=2 nu sts=0
 
-
 " -------------------- LSP ---------------------------------
 :lua << EOF
   local nvim_lsp = require('lspconfig')
@@ -86,6 +85,7 @@ autocmd FileType yaml setlocal et ts=2 ai sw=2 nu sts=0
     buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
     buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 
+vim.lsp.set_log_level("debug")
     -- Set some keybinds conditional on server capabilities
     if client.server_capabilities.document_formatting then
         buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
@@ -102,7 +102,6 @@ autocmd FileType yaml setlocal et ts=2 ai sw=2 nu sts=0
     }
   end
 EOF
-
 " -------------------- LSP ---------------------------------
 "
 " use <tab> for trigger completion and navigate to the next complete item
@@ -121,17 +120,18 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 "Disable coc for all filetypes except the listed
-let g:my_coc_file_types = ['c', 'cpp', 'h', 'asm', 'hpp', 'vim', 'sh', 'py']
-
+let g:coc_filetypes_enable = ['python']
 function! s:disable_coc_for_type()
-	if index(g:my_coc_file_types, &filetype) == -1
-	        let b:coc_enabled = 0
-	endif
+  if index(g:coc_filetypes_enable, &filetype) == -1
+    :silent! CocDisable
+  else
+    :silent! CocEnable
+  endif
 endfunction
 
 augroup CocGroup
-	autocmd!
-	autocmd BufNew,BufEnter * call s:disable_coc_for_type()
+ autocmd!
+ autocmd BufNew,BufEnter,BufAdd,BufCreate * call s:disable_coc_for_type()
 augroup end
 
 " YAML files
