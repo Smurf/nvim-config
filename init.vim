@@ -9,6 +9,7 @@ set shiftwidth=4
 set expandtab
 set guifont=Source\ Code\ Pro\ 12
 set nofoldenable
+set mouse=
 "stop nerdtree from popping open every file open
 set switchbuf=useopen,usetab
 
