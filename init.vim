@@ -15,8 +15,14 @@ set switchbuf=useopen,usetab
 
 syntax on
 
+let g:nvim_system_wide = 1
+if g:nvim_system_wide
+    let g:PLUGIN_HOME="/usr/local/share/nvim/site"
+else
+    let g:PLUGIN_HOME=expand(stdpath('data') . '/plugged')
+endif
 
-call plug#begin('~/.local/share/nvim/plugged')
+call plug#begin(g:PLUGIN_HOME)
     Plug 'kooparse/vim-color-desert-night'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'scrooloose/nerdtree'
@@ -31,9 +37,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 call plug#end()
 
 colorscheme desert-night
-
 let delimitMate_matchpairs = "(:),[:],{:}"
-
 "NERD Tree settings
 "stop nerdtreetabs from opening every time you switch tabs
 let g:nerdtree_tabs_open_on_new_tab = 0
