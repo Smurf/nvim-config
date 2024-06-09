@@ -18,6 +18,7 @@ syntax on
 let g:nvim_system_wide = 1
 if g:nvim_system_wide
     let g:PLUGIN_HOME="/usr/local/share/nvim/site"
+    source /etc/xdg/nvim/plug.vim
 else
     let g:PLUGIN_HOME=expand(stdpath('data') . '/plugged')
 endif

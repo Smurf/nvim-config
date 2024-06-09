@@ -26,6 +26,8 @@ cp -r adobe-source-code-pro/ /usr/share/fonts/
 sed -i '/let g:nvim_system_wide = 0/c\let g:nvim_system_wide = 1' ./init.vim
 
 cp ./init.vim /home/$USER/.config/nvim/init.vim
+curl -fLo /home/$USER/.config/.nvim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 pip install pyright --quiet --exists-action i
 pip install pynvim --quiet --exists-action i

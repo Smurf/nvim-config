@@ -31,8 +31,8 @@ fi
 sed -i '/let g:nvim_system_wide = 0/c\let g:nvim_system_wide = 1' ./init.vim
 
 mkdir -p /etc/xdg/nvim
-
-curl -fLo /etc/xdg/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+mkdir -p /usr/local/share/nvim/site
+curl -fLo /etc/xdg/nvim/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 cp ./init.vim /etc/xdg/nvim/sysinit.vim
 
