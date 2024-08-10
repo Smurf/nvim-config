@@ -39,18 +39,19 @@ call plug#begin(g:PLUGIN_HOME)
 call plug#end()
 
 colorscheme desert-night
+let mapleader = ' '
 let delimitMate_matchpairs = "(:),[:],{:}"
 "NERD Tree settings
 "stop nerdtreetabs from opening every time you switch tabs
 let g:nerdtree_tabs_open_on_new_tab = 0
 "NERD Tree mappings
-nnoremap <space>n :NERDTreeMirrorToggle<CR>
+nnoremap <leader>n :NERDTreeMirrorToggle<CR>
 
 " Map ctrl-movement keys to window switching
-nnoremap <C-k> <C-w><Up>
-nnoremap <C-j> <C-w><Down>
-nnoremap <C-l> <C-w><Right>
-nnoremap <C-h> <C-w><Left>
+nnoremap <leader>k <C-w><Up>
+nnoremap <leader>j <C-w><Down>
+nnoremap <leader>l <C-w><Right>
+nnoremap <leader>h <C-w><Left>
 
 "YAML config
 au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
@@ -80,22 +81,22 @@ autocmd FileType yaml setlocal et ts=2 ai sw=2 nu sts=0
     buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
     buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
     buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-    buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-    buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-    buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-    buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-    buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+    buf_set_keymap('n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+    buf_set_keymap('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+    buf_set_keymap('n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+    buf_set_keymap('n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+    buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
     buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-    buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+    buf_set_keymap('n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
     buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
     buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-    buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+    buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 
     -- Set some keybinds conditional on server capabilities
     if client.server_capabilities.document_formatting then
-        buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+        buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
     elseif client.server_capabilities.document_range_formatting then
-        buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+        buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
     end
 
   end
@@ -151,3 +152,8 @@ let g:indentLine_fileTypeExclude = ['markdown', 'json']
 
 autocmd Filetype json
   \ let g:indentLine_setConceal = 0 
+
+" FZF Settings
+let g:fzf_vim = {}
+nnoremap <leader><leader> :Files<CR>
+nnoremap <leader>l :BLines<CR>
