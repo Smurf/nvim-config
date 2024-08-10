@@ -15,15 +15,16 @@ set switchbuf=useopen,usetab
 
 syntax on
 
-let g:nvim_system_wide = 1
+let g:nvim_system_wide = 0
 if g:nvim_system_wide
     let g:PLUGIN_HOME="/usr/local/share/nvim/site"
-    source /etc/xdg/nvim/plug.vim
 else
     let g:PLUGIN_HOME=expand(stdpath('data') . '/plugged')
 endif
 
 call plug#begin(g:PLUGIN_HOME)
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
     Plug 'kooparse/vim-color-desert-night'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'scrooloose/nerdtree'
@@ -43,7 +44,7 @@ let delimitMate_matchpairs = "(:),[:],{:}"
 "stop nerdtreetabs from opening every time you switch tabs
 let g:nerdtree_tabs_open_on_new_tab = 0
 "NERD Tree mappings
-nnoremap _n :NERDTreeMirrorToggle<CR>
+nnoremap <space>n :NERDTreeMirrorToggle<CR>
 
 " Map ctrl-movement keys to window switching
 nnoremap <C-k> <C-w><Up>

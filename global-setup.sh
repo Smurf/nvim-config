@@ -34,7 +34,7 @@ mkdir -p /etc/xdg/nvim
 mkdir -p /usr/local/share/nvim/site
 chmod 0766 /usr/local/share/nvim/site
 
-curl -fLo /etc/xdg/nvim/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+curl -fLo /usr/local/share/nvim/site/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 cp ./init.vim /etc/xdg/nvim/sysinit.vim
 

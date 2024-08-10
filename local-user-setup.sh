@@ -23,7 +23,7 @@ fi
 cp -r adobe-source-code-pro/ /usr/share/fonts/
 
 # Make it is not system wide
-sed -i '/let g:nvim_system_wide = 0/c\let g:nvim_system_wide = 1' ./init.vim
+sed -i '/let g:nvim_system_wide = 1/c\let g:nvim_system_wide = 0' ./init.vim
 
 cp ./init.vim /home/"$USER"/.config/nvim/init.vim
 curl -fLo /home/"$USER"/.config/.nvim/autoload/plug.vim --create-dirs \
