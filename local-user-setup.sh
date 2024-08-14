@@ -14,20 +14,27 @@ then
     exit 1
 fi
 
-if [ -f /home/"$USER"/.config/nvim/init.vim ]
-then
-    mv /home/"$USER"/.config/nvim/init.vim /home/"$USER"/.config/nvim/init.vim.bak"$(date +"%Y-%m-%d-%s")"
-fi
-
-# Install font
-cp -r adobe-source-code-pro/ /home/"$USER"/.local/share/fonts/
-
 # Make it is not system wide
 sed -i '/let g:nvim_system_wide = 1/c\let g:nvim_system_wide = 0' ./init.vim
 
-cp ./init.vim /home/"$USER"/.config/nvim/init.vim
-curl -fLo /home/"$USER"/.config/.nvim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+#Note current dir and make local config dir
+GIT_DIR="$PWD"
+mkdir -p /home/"$USER"/.config/nvim
+
+#Move into home config dir
+pushd /home/"$USER"/.config/nvim
+echo $PWD
+if [ -f init.vim ]
+then
+    mv init.vim init.vim.bak"$(date +"%Y-%m-%d-%s")"
+fi
+
+# Install font
+cp -r $GIT_DIR/adobe-source-code-pro/* /home/"$USER"/.local/share/fonts/
+
+cp $GIT_DIR/init.vim init.vim
+mkdir -p /home/"$USER"/.config/nvim/autoload
+curl -o autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 pip install pyright --quiet --exists-action i
 pip install pynvim --quiet --exists-action i
