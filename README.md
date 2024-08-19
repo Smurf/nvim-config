@@ -4,10 +4,18 @@ This nvim config has been setup to allow autocomplete with python.
 
 ## Install
 
-1. Run `setup.sh` to install depdendencies and copy init.vim to `~/.config/nvim/`
-    - This will also backup your current `init.vim` file
-2. Install Adobe Source Code Pro Fonts
-    - https://github.com/adobe-fonts/source-code-pro
+### Install For Your User
+
+1. Run `local-user-setup.sh`
+
+### Install for all users on the system
+
+1. Run `all-user-setup` to install local configs for all users on a system
+
+### Config Backups
+
+The scripts will not delete any current configs and instead move them with a timestamp.
+
 ## Configuring Projects
 
 - Each python project requires a `pyrightconfig.json` with the vaues you want.
