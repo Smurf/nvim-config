@@ -156,4 +156,4 @@ autocmd Filetype json
 " FZF Settings
 let g:fzf_vim = {}
 nnoremap <leader><leader> :Files<CR>
-nnoremap <leader>l :BLines<CR>
+nnoremap <leader>/ :BLines<CR>
