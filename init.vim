@@ -36,6 +36,7 @@ call plug#begin(g:PLUGIN_HOME)
     Plug 'neovim/nvim-lspconfig'
     Plug 'mrk21/yaml-vim'
     Plug 'Yggdroot/indentLine'
+    Plug 'yaegassy/coc-ansible', {'do': 'yarn install --frozen-lockfile'}
 call plug#end()
 
 colorscheme desert-night
@@ -54,12 +55,8 @@ nnoremap <leader>l <C-w><Right>
 nnoremap <leader>h <C-w><Left>
 
 "YAML config
-au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
 "Close popups for auto complete
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-
-autocmd FileType yaml setlocal et ts=2 ai sw=2 nu sts=0
-
 " -------------------- LSP ---------------------------------
 :lua << EOF
   local nvim_lsp = require('lspconfig')
@@ -126,7 +123,7 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 "Disable coc for all filetypes except the listed
-let g:coc_filetypes_enable = ['python']
+let g:coc_filetypes_enable = ['python', 'yaml.ansible']
 function! s:disable_coc_for_type()
   if index(g:coc_filetypes_enable, &filetype) == -1
     :silent! CocDisable
@@ -142,6 +139,16 @@ augroup end
 
 " YAML files
 au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
+autocmd FileType yaml setlocal et ts=2 ai sw=2 nu sts=0
+
+au BufRead,BufNewFile */playbooks/*.yml set filetype=yaml.ansible
+au BufRead,BufNewFile */playbooks/*.yaml set filetype=yaml.ansible
+au BufRead,BufNewFile */roles/*.yml set filetype=yaml.ansible
+au BufRead,BufNewFile */roles/*.yaml set filetype=yaml.ansible
+let g:coc_filetype_map = {
+  \ 'yaml.ansible': 'ansible',
+  \ }
+
 "Close popups for auto complete
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
