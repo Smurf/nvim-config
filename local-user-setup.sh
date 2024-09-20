@@ -44,6 +44,7 @@ curl -o autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/ma
 
 pip install pyright --quiet --exists-action i
 pip install pynvim --quiet --exists-action i
+pip install jedi --quiet --exists-action i
 nvim +PlugInstall +qall
 nvim +PlugUpdate +qall
 nvim +CocInstall coc-pyright +qall
