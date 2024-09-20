@@ -149,9 +149,6 @@ let g:coc_filetype_map = {
   \ 'yaml.ansible': 'ansible',
   \ }
 
-"Close popups for auto complete
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-
 autocmd FileType yaml setlocal et ts=2 ai sw=2 nu sts=0
 
 " Indentline Config
