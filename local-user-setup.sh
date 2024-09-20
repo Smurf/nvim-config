@@ -15,6 +15,7 @@ then
 fi
 
 if ! command -v yarn &> /dev/null
+then
     echo "yarn must be installed for this script to be ran."
     exit 1
 fi
