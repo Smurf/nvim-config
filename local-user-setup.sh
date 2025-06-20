@@ -1,6 +1,13 @@
 #! /usr/bin/bash
 set -e
 
+if [ "$1x" == "x" ]
+then
+    USER_DIR="/home/$USER"
+else
+    USER_DIR="/home/$1"
+fi
+
 if ! command -v nvim &> /dev/null
 then
     echo "Neovim must be installed for this script to be ran."
@@ -20,33 +27,29 @@ then
     exit 1
 fi
 
-
-# Make it is not system wide
-sed -i '/let g:nvim_system_wide = 1/c\let g:nvim_system_wide = 0' ./init.vim
-
-#Note current dir and make local config dir
-GIT_DIR="$PWD"
-mkdir -p /home/"$USER"/.config/nvim
-
-#Move into home config dir
-pushd /home/"$USER"/.config/nvim
-echo $PWD
-if [ -f init.vim ]
+if [ -d "$USER_DIR/.config/nvim" ]
 then
-    mv init.vim init.vim.bak"$(date +"%Y-%m-%d-%s")"
+    mv "$USER_DIR/.config/nvim" "$USER_DIR/.config/nvim.bak$(date +"%Y-%m-%d-%s")"
 fi
 
-# Install font
-cp -r $GIT_DIR/adobe-source-code-pro/* /home/"$USER"/.local/share/fonts/
+cp -r nvim "$USER_DIR/.config/"
+#Move into home config dir
+pushd "$USER_DIR/.config/nvim"
 
-cp $GIT_DIR/init.vim init.vim
-mkdir -p /home/"$USER"/.config/nvim/autoload
-curl -o autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+# Install hack font
+curl -L -o /tmp/hack.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/Hack.zip
+unzip -o /tmp/hack.zip -d "$USER_DIR/.local/share/fonts/"
+rm -f /tmp/hack.zip
+
+if [ ! -d "$USER_DIR"/.local/share/nvim/site/pack/packer/start/packer.nvim ]
+then
+    git clone --depth 1 https://github.com/wbthomason/packer.nvim "$USER_DIR"/.local/share/nvim/site/pack/packer/start/packer.nvim
+fi
 
 pip install pyright --quiet --exists-action i
 pip install pynvim --quiet --exists-action i
-nvim +PlugInstall +qall
-nvim +PlugUpdate +qall
+nvim +PackerInstall +qall
+nvim +PackerSync +qall
 nvim +CocInstall coc-pyright +qall
 nvim +CocInstall '@yaegassy/coc-ansible' +qall
 nvim +CocCommand 'ansible.builtin.installRequirementsTools' +qall
