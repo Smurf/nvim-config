@@ -14,6 +14,13 @@ then
     exit 1
 fi
 
+if ! command -v yarn &> /dev/null
+then
+    echo "yarn must be installed for this script to be ran."
+    exit 1
+fi
+
+
 # Make it is not system wide
 sed -i '/let g:nvim_system_wide = 1/c\let g:nvim_system_wide = 0' ./init.vim
 
@@ -41,3 +48,6 @@ pip install pynvim --quiet --exists-action i
 nvim +PlugInstall +qall
 nvim +PlugUpdate +qall
 nvim +CocInstall coc-pyright +qall
+nvim +CocInstall '@yaegassy/coc-ansible' +qall
+nvim +CocCommand 'ansible.builtin.installRequirementsTools' +qall
+nvim +CocInstall coc-go +qall
