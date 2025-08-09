@@ -27,29 +27,10 @@ pip install pynvim --quiet --exists-action i
 
 SRC_DIR=$(cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)
 XDG_OLD=$XDG_CONFIG_HOME
-for homeidr in /home/*
+for homedir in /home/*
 do 
-    pushd $homedir
-
-    mkdir -p .config/nvim
-    pushd .config/nvim
-
-    if [ -f .config/nvim/init.vim ]
-    then
-        mv .config/nvim/init.vim .config/nvim/init.vim.bak"$(date +"%Y-%m-%d-%s")"
-    fi
-
-    cp $SRC_DIR/init.vim init.vim
-    mkdir -p .config/nvim/autoload
-    curl -o autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-    export $XDG_CONFIG_HOME=$(PWD)
-    nvim +PlugInstall +qall
-    nvim +PlugUpdate +qall
-    nvim +CocInstall coc-pyright +qall
-
-    popd
-    popd
+    export XDG_CONFIG_HOME="$homedir"
+    $SRC_DIR/local-user-setup.sh "$homedir"
 done
 
-export $XDG_CONFIG_HOME=$XDG_OLD
+export XDG_CONFIG_HOME=$XDG_OLD

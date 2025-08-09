@@ -35,6 +35,6 @@ require('autocmds')
 
 -- Color scheme (can also be in plugin_configs if tied to a plugin)
 vim.cmd([[
-  colorscheme modus_vivendi
-  colorscheme desert-night
+colorscheme desert-night
 ]])
+--  colorscheme modus_vivendi
