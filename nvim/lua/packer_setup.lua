@@ -56,6 +56,7 @@ require('packer').startup(function(use)
   use 'miikanissi/modus-themes.nvim'
   -- Kubernetes support
   use 'towolf/vim-helm'
+--end )
   use {
      'someone-stole-my-name/yaml-companion.nvim',
      requires = {

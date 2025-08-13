@@ -46,6 +46,7 @@ then
     git clone --depth 1 https://github.com/wbthomason/packer.nvim "$USER_DIR"/.local/share/nvim/site/pack/packer/start/packer.nvim
 fi
 
+npm install -g yaml-language-server
 pip install pyright --quiet --exists-action i
 pip install pynvim --quiet --exists-action i
 nvim +PackerInstall +qall
