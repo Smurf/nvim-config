@@ -55,19 +55,19 @@ require('packer').startup(function(use)
   use 'lvimuser/lsp-inlayhints.nvim'
   use 'miikanissi/modus-themes.nvim'
   -- Kubernetes support
-  use 'towolf/vim-helm'
+--  use 'towolf/vim-helm'
 --end )
-  use {
-     'someone-stole-my-name/yaml-companion.nvim',
-     requires = {
-       { 'neovim/nvim-lspconfig' },
-       { 'nvim-lua/plenary.nvim' },
-       { 'nvim-telescope/telescope.nvim' },
-     },
-     config = function()
-         require("telescope").load_extension("yaml_schema")
-     end,
-   }
+--  use {
+--     'someone-stole-my-name/yaml-companion.nvim',
+--     requires = {
+--       { 'neovim/nvim-lspconfig' },
+--       { 'nvim-lua/plenary.nvim' },
+--       { 'nvim-telescope/telescope.nvim' },
+--     },
+--     config = function()
+--         require("telescope").load_extension("yaml_schema")
+--     end,
+--   }
 end)
 
 -- Make install_coc_ansible available for autocmds

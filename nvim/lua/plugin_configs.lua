@@ -19,4 +19,4 @@ vim.g.coc_filetype_map = {
   ['yaml.ansible'] = 'ansible'
 }
 -- Configure coc.nvim for other filetypes
-vim.g.coc_filetypes_enable = {'python', 'go', 'golang', 'yaml.ansible'}
+vim.g.coc_filetypes_enable = {'python', 'go', 'golang', 'yaml.ansible', 'terraform', 'tf'}
