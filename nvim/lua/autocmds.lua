@@ -10,10 +10,10 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 -- Run yarn install for coc-ansible after Packer syncs
-vim.api.nvim_create_autocmd("User", {
-  pattern = "PackerComplete",
-  callback = _G.install_coc_ansible -- Call the global function
-})
+--vim.api.nvim_create_autocmd("User", {
+--  pattern = "PackerComplete",
+--  callback = _G.install_coc_ansible -- Call the global function
+--})
 
 -- YAML and Ansible support
 -- YAML file settings
@@ -27,20 +27,20 @@ vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
 
 -- Ansible YAML detection
 vim.api.nvim_create_autocmd("BufRead", {
-  pattern = {"*/playbooks/*.yml", "*/playbooks/*.yaml", "*/roles/*.yml", "*/roles/*.yaml", "*/main.yaml", "*/tasks/*.yml", "*/tasks/*.yaml"},
+  pattern = {"*/playbooks/*.yml", "*/playbooks/*.yaml", "*/roles/*.yml", "*/roles/*.yaml", "*/main.yaml", "*/tasks/*.yml", "*/tasks/*.yaml", "*ansible/*.yml", "*ansible/*.yaml"},
   callback = function()
     vim.opt_local.filetype = "yaml.ansible"
   end
 })
 
 -- CocEnable/Disable based on filetype
-vim.api.nvim_create_autocmd({"BufNew", "BufEnter", "BufAdd", "BufCreate"}, {
-  callback = function()
-    local ft = vim.bo.filetype
-    if vim.tbl_contains(vim.g.coc_filetypes_enable, ft) then
-      vim.cmd('CocEnable')
-    else
-      vim.cmd('CocDisable')
-    end
-  end
-})
+-- vim.api.nvim_create_autocmd({"BufNew", "BufEnter", "BufAdd", "BufCreate"}, {
+--   callback = function()
+--     local ft = vim.bo.filetype
+--     if vim.tbl_contains(vim.g.coc_filetypes_enable, ft) then
+--       vim.cmd('CocEnable')
+--     else
+--       vim.cmd('CocDisable')
+--     end
+--   end
+-- })

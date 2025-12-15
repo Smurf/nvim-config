@@ -23,7 +23,7 @@ vim.cmd('syntax on')
 
 -- Set leader key
 vim.g.mapleader = " "
-
+vim.g.maplocalleader = " "
 -- Plugin management with Packer
 require('packer_setup')
 
@@ -32,6 +32,7 @@ require('keymaps')
 require('lsp_config')
 require('plugin_configs')
 require('autocmds')
+require('completion')
 
 -- Color scheme (can also be in plugin_configs if tied to a plugin)
 vim.cmd([[
