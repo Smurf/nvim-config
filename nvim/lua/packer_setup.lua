@@ -11,14 +11,6 @@ end
 
 local packer_bootstrap = ensure_packer()
 
--- Function to run yarn install for coc-ansible
-local function install_coc_ansible()
-  local coc_ansible_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/coc-ansible'
-  if vim.fn.isdirectory(coc_ansible_path) ~= 0 then
-    vim.fn.system('cd ' .. coc_ansible_path .. ' && yarn install --frozen-lockfile')
-  end
-end
-
 require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use {
@@ -26,10 +18,6 @@ require('packer').startup(function(use)
     requires = { {'nvim-lua/plenary.nvim'} }
   }
   use 'kooparse/vim-color-desert-night'
---   use {
---     'neoclide/coc.nvim',
---     branch = 'release'
---   }
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
@@ -45,11 +33,7 @@ require('packer').startup(function(use)
     'nvim-lualine/lualine.nvim',
     requires = { 'nvim-tree/nvim-web-devicons' }
   }
-  use 'neovim/nvim-lspconfig'
   use 'lukas-reineke/indent-blankline.nvim'
---  use {
---      'yaegassy/coc-ansible',
---  }
   use 'ray-x/go.nvim'
   use 'ray-x/guihua.lua'
   use 'miikanissi/modus-themes.nvim'
@@ -59,7 +43,7 @@ require('packer').startup(function(use)
   use 'hrsh7th/cmp-buffer'       -- Optional: Suggest words from the current buffer
   use 'hrsh7th/cmp-path'         -- Optional: Suggest file paths
   use 'hrsh7th/cmp-cmdline'      -- Optional: Autocomplete for command line
-
+  use 'ray-x/lsp_signature.nvim' -- Optional: Type signatures after auto complete
   -- Snippet Engine (Required for nvim-cmp to work properly)
   use 'L3MON4D3/LuaSnip'         -- Snippet engine
   use 'saadparwaiz1/cmp_luasnip' -- Adapter for LuaSnip
@@ -79,6 +63,3 @@ require('packer').startup(function(use)
 --     end,
 --   }
 end)
-
--- Make install_coc_ansible available for autocmds
--- _G.install_coc_ansible = install_coc_ansible

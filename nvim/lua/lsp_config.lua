@@ -1,5 +1,4 @@
 -- lua/lsp_config.lua
---local nvim_lsp = require('lspconfig')
 -- ADD THIS: Set up completion capabilities
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
@@ -16,9 +15,11 @@ end
 
 -- Inlay hints setup
 -- Native Inlay hints setup (Neovim 0.10+)
-vim.api.nvim_create_augroup("LspAttach_inlayhints", { clear = true })
+vim.api.nvim_set_hl(0, "LspInlayHint", {
+    fg = "#FC8400", -- Replace with your desired foreground color (e.g., a muted gray)
+    italic = true,    -- Optional: set text to italic
+})
 vim.api.nvim_create_autocmd("LspAttach", {
-  group = "LspAttach_inlayhints",
   callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     -- Check if the server supports inlay hints
@@ -30,39 +31,24 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- Configure LSP servers
 
 -- Terraform
---nvim_lsp.terraformls.setup({
---  on_attach = on_attach,
---})
 vim.lsp.config("terraformls", {
   on_attach = on_attach,
   capabilities = capabilities,
+  filetypes = {"terraform"},
 })
 -- Python
---nvim_lsp.pyright.setup({
---  on_attach = on_attach,
---})
-vim.lsp.config("pyright", {
+vim.lsp.config("basedpyright", {
   on_attach = on_attach,
   capabilities = capabilities,
+  filetypes = {"python"},
+  cmd = {'basedpyright-langserver', '--stdio'}
 })
 -- YAML
---nvim_lsp.yamlls.setup({
---  on_attach = on_attach,
---  settings = {
---    yaml = {
---      -- This helps with Kubernetes files
---      schemas = {
---        kubernetes = "*.yaml",
---        ["http://json.schemastore.org/github-workflow"] = ".github/workflows/*",
---        ["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
---        ["http://json.schemastore.org/ansible-stable-2.9"] = "roles/tasks/*.{yml,yaml}",
---      },
---    },
---  },
---})
 vim.lsp.config("yamlls", {
   on_attach = on_attach,
   capabilities = capabilities,
+  cmd = {'yaml-language-server', '--stdio'},
+  filetypes = {'yaml'},
   settings = {
     yaml = {
       -- This helps with Kubernetes files
@@ -125,6 +111,7 @@ vim.lsp.config("yamlls", {
 -- 
 -- Kubernetes YAML support using yaml-companion
 vim.lsp.enable('terraformls')
-vim.lsp.enable('pyright')
+vim.lsp.enable('basedpyright')
 vim.lsp.enable('yamlls')
+require "lsp_signature".setup()
 --vim.lsp.enable('gopls')

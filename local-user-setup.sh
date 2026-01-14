@@ -1,6 +1,12 @@
 #! /usr/bin/bash
 set -e
 
+if ! command -v npm &> /dev/null
+then
+    echo "Install NPM!"
+    exit 1
+fi
+
 if [ "$1x" == "x" ]
 then
     USER_DIR="/home/$USER"
@@ -28,13 +34,13 @@ curl -L -o /tmp/hack.zip https://github.com/ryanoasis/nerd-fonts/releases/downlo
 unzip -o /tmp/hack.zip -d "$USER_DIR/.local/share/fonts/"
 rm -f /tmp/hack.zip
 fc-cache -fv
+
 if [ ! -d "$USER_DIR"/.local/share/nvim/site/pack/packer/start/packer.nvim ]
 then
     git clone --depth 1 https://github.com/wbthomason/packer.nvim "$USER_DIR"/.local/share/nvim/site/pack/packer/start/packer.nvim
 fi
 
 npm install -g yaml-language-server
-pip install pyright --quiet --exists-action i
+pip install basedpyright --quiet --exists-action i
 pip install pynvim --quiet --exists-action i
-nvim +PackerInstall +qall
 nvim +PackerSync +qall

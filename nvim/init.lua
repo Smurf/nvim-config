@@ -38,4 +38,7 @@ require('completion')
 vim.cmd([[
 colorscheme desert-night
 ]])
+-- Set inlay hint color
+vim.api.nvim_set_hl(0, "LspInlayHint", { fg = "#FC8400",  italic = true })
+
 --  colorscheme modus_vivendi
