@@ -28,7 +28,12 @@ local on_attach_lsp_keymaps = function(bufnr)
 end
 
 _G.on_attach_lsp_keymaps = on_attach_lsp_keymaps -- Make this accessible globally for lsp_config
-
+-- Disable inlay hints
+vim.keymap.set("n", "<leader>i", function()
+    local enabled = not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 })
+    vim.lsp.inlay_hint.enable(enabled, { bufnr = 0 })
+    vim.notify("Inlay hints: " .. (enabled and "ON" or "OFF")) -- Optional notification
+end, { desc = "Toggle LSP Inlay Hints" })
 -- Telescope (replacement for FZF) keybindings
 local telescope = require('telescope.builtin')
 vim.keymap.set('n', '<leader><leader>', telescope.find_files, {})

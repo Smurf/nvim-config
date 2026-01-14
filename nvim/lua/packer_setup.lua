@@ -52,7 +52,6 @@ require('packer').startup(function(use)
 --  }
   use 'ray-x/go.nvim'
   use 'ray-x/guihua.lua'
-  use 'lvimuser/lsp-inlayhints.nvim'
   use 'miikanissi/modus-themes.nvim'
   -- Completion Engine
   use 'hrsh7th/nvim-cmp'         -- The main completion plugin

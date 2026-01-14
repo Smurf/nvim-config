@@ -15,15 +15,15 @@ local on_attach = function(client, bufnr)
 end
 
 -- Inlay hints setup
-vim.api.nvim_create_augroup("LspAttach_inlayhints", {})
+-- Native Inlay hints setup (Neovim 0.10+)
+vim.api.nvim_create_augroup("LspAttach_inlayhints", { clear = true })
 vim.api.nvim_create_autocmd("LspAttach", {
   group = "LspAttach_inlayhints",
   callback = function(args)
-    if not (args.data and args.data.client_id) then return end
     local client = vim.lsp.get_client_by_id(args.data.client_id)
-    local status_ok, inlayhints = pcall(require, "lsp-inlayhints")
-    if status_ok then
-      inlayhints.on_attach(client, args.buf)
+    -- Check if the server supports inlay hints
+    if client and client.server_capabilities.inlayHintProvider then
+      vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
     end
   end,
 })
@@ -34,14 +34,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
 --  on_attach = on_attach,
 --})
 vim.lsp.config("terraformls", {
-  on_attach = on_attach
+  on_attach = on_attach,
+  capabilities = capabilities,
 })
 -- Python
 --nvim_lsp.pyright.setup({
 --  on_attach = on_attach,
 --})
 vim.lsp.config("pyright", {
-  on_attach = on_attach
+  on_attach = on_attach,
+  capabilities = capabilities,
 })
 -- YAML
 --nvim_lsp.yamlls.setup({
@@ -60,6 +62,7 @@ vim.lsp.config("pyright", {
 --})
 vim.lsp.config("yamlls", {
   on_attach = on_attach,
+  capabilities = capabilities,
   settings = {
     yaml = {
       -- This helps with Kubernetes files
