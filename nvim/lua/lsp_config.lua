@@ -35,6 +35,7 @@ vim.lsp.config("terraformls", {
   on_attach = on_attach,
   capabilities = capabilities,
   filetypes = {"terraform"},
+  cmd = {'terraform-ls', 'serve'}
 })
 -- Python
 vim.lsp.config("basedpyright", {
