@@ -40,7 +40,9 @@ then
     git clone --depth 1 https://github.com/wbthomason/packer.nvim "$USER_DIR"/.local/share/nvim/site/pack/packer/start/packer.nvim
 fi
 
-npm install -g yaml-language-server
-pip install basedpyright --quiet --exists-action i
-pip install pynvim --quiet --exists-action i
+sudo npm install -g yaml-language-server
+sudo npm install -g @ansible/ansible-language-server
+sudo pip install basedpyright --quiet --exists-action i
+sudo pip install pynvim --quiet --exists-action i
+sudo pip install ansible-lint --quiet --exists-action i
 nvim +PackerSync +qall

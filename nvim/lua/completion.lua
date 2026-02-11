@@ -21,7 +21,7 @@ cmp.setup({
     ['<C-e>'] = cmp.mapping.abort(),
     
     -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-    ['<CR>'] = cmp.mapping.confirm({ select = true }), 
+    ['<C-CR>'] = cmp.mapping.confirm({ select = true }), 
 
     -- Tab navigation for the completion menu
     ["<Tab>"] = cmp.mapping(function(fallback)

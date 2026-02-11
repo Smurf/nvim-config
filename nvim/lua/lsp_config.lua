@@ -44,6 +44,13 @@ vim.lsp.config("basedpyright", {
   filetypes = {"python"},
   cmd = {'basedpyright-langserver', '--stdio'}
 })
+-- Ansible
+vim.lsp.config("als", {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = {"yaml.ansible"},
+  cmd = {'ansible-language-server', '--stdio'}
+})
 -- YAML
 vim.lsp.config("yamlls", {
   on_attach = on_attach,
@@ -114,5 +121,6 @@ vim.lsp.config("yamlls", {
 vim.lsp.enable('terraformls')
 vim.lsp.enable('basedpyright')
 vim.lsp.enable('yamlls')
+vim.lsp.enable('als')
 require "lsp_signature".setup()
 --vim.lsp.enable('gopls')
