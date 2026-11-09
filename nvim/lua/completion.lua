@@ -21,8 +21,18 @@ cmp.setup({
     ['<C-e>'] = cmp.mapping.abort(),
     
     -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-    ['<C-CR>'] = cmp.mapping.confirm({ select = true }), 
-
+    -- ['<C-CR>'] = cmp.mapping.confirm({ select = true }), 
+    ['<C-CR>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.confirm({ select = false,
+                      behavior = cmp.ConfirmBehavior.Replace
+                    })
+      elseif luasnip.expandable() then
+        luasnip.expand()
+      else
+        fallback() -- Allows normal C-CR behavior if menu is closed
+      end
+    end, { 'i', 's' }),
     -- Tab navigation for the completion menu
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
