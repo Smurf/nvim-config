@@ -31,10 +31,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- Configure LSP servers
 
 -- Terraform
+vim.filetype.add({
+  extension = {
+    tf = "terraform",
+    tfvars = "terraform"
+  }
+})
+
 vim.lsp.config("terraformls", {
   on_attach = on_attach,
   capabilities = capabilities,
-  filetypes = {"terraform"},
+  filetypes = {"terraform", "tf", "terraform-vars"},
+  root_markers = { '.terraform', 'main.tf'},
   cmd = {'terraform-ls', 'serve'}
 })
 -- Python

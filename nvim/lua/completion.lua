@@ -19,7 +19,7 @@ cmp.setup({
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.abort(),
-    
+
     -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     -- ['<C-CR>'] = cmp.mapping.confirm({ select = true }), 
     ['<C-CR>'] = cmp.mapping(function(fallback)
