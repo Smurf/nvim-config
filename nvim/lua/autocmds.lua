@@ -9,12 +9,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   group = format_sync_grp,
 })
 
--- Run yarn install for coc-ansible after Packer syncs
---vim.api.nvim_create_autocmd("User", {
---  pattern = "PackerComplete",
---  callback = _G.install_coc_ansible -- Call the global function
---})
-
 -- YAML and Ansible support
 -- YAML file settings
 vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
@@ -32,15 +26,3 @@ vim.api.nvim_create_autocmd("BufRead", {
     vim.opt_local.filetype = "yaml.ansible"
   end
 })
-
--- CocEnable/Disable based on filetype
--- vim.api.nvim_create_autocmd({"BufNew", "BufEnter", "BufAdd", "BufCreate"}, {
---   callback = function()
---     local ft = vim.bo.filetype
---     if vim.tbl_contains(vim.g.coc_filetypes_enable, ft) then
---       vim.cmd('CocEnable')
---     else
---       vim.cmd('CocDisable')
---     end
---   end
--- })
